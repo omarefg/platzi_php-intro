@@ -1,8 +1,7 @@
 <?php
-  require_once 'vendor/autoload.php';
-  require_once('./utils/client/jobs.php');
-  require_once('./utils/client/projects.php');
-  require_once('./utils/client/general.php');
+  require_once('utils/client/jobs.php');
+  require_once('utils/client/projects.php');
+  require_once('utils/client/general.php');
 ?>
 
 <!DOCTYPE html>

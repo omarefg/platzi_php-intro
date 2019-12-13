@@ -1,7 +1,5 @@
 <?php
-    require_once 'vendor/autoload.php';
-    require_once 'config.php';
-    require_once './utils/client/projects.php';
+    require_once 'utils/client/projects.php';
 
     if(!empty($_POST)) {
         createProject($_POST['title'], $_POST['description']);

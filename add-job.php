@@ -1,8 +1,5 @@
 <?php
-    require_once 'vendor/autoload.php';
-    require_once 'config.php';
-    require_once './utils/client/jobs.php';
-
+    require_once 'utils/client/jobs.php';
     if(!empty($_POST)) {
         createJob($_POST['title'], $_POST['description']);
     }
