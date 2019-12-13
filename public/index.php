@@ -27,19 +27,29 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-$route = $_GET['route'] ?? '/';
+$request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
+    $_SERVER,
+    $_GET,
+    $_POST,
+    $_COOKIE,
+    $_FILES
+);
 
-switch ($route) {
-    case '/': {
-        require '../index.php';
-        break;
-    }
-    case 'add-job': {
-        require '../add-job.php';
-        break;
-    }
-    case 'add-project': {
-        require '../add-project.php';
-        break;
-    }
-}
+var_dump($request->getUri()->getPath());
+
+// $route = $_GET['route'] ?? '/';
+
+// switch ($route) {
+//     case '/': {
+//         require '../index.php';
+//         break;
+//     }
+//     case 'add-job': {
+//         require '../add-job.php';
+//         break;
+//     }
+//     case 'add-project': {
+//         require '../add-project.php';
+//         break;
+//     }
+// }
