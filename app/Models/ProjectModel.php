@@ -3,16 +3,16 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
-class Job extends Model {
+class ProjectModel extends Model {
 
-    protected $table = 'jobs';
+    protected $table = 'projects';
 
     public function getDurationAsString() {
         $years = floor($this->months / 12);
         $extraMonths = $this->months % 12;
         if (!$years) {
-            return "Job duration: $extraMonths months";
+            return "Project duration: $extraMonths months";
         }
-        return "Job duration: $years years, $extraMonths months";
+        return "Project duration: $years years, $extraMonths months";
     }
 }

@@ -1,10 +1,3 @@
-<?php
-    require_once 'utils/client/jobs.php';
-    if(!empty($_POST)) {
-        createJob($_POST['title'], $_POST['description']);
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,11 +9,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 
-    <title>Add Job</title>
+    <title>Add Project</title>
 </head>
 <body>
-    <h1>Add Job</h1>
-    <form action="add-job.php" method="post">
+    <h1>Add Project</h1>
+    <form action="/intro-php/add-project/" method="post">
         <label for="">Title:</label>
         <input type="text" name="title"/>
         <br/>
