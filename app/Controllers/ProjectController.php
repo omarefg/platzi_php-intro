@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use App\Models\ProjectModel;
 
-class ProjectController {
+class ProjectController extends BaseController {
 
     private function createProject ($title, $description) {
         $project = new ProjectModel();
@@ -22,6 +22,6 @@ class ProjectController {
             $this->createProject($postData['title'], $postData['description']);
         }
 
-        include '../views/add-project.php';
+        return $this->renderHTML('add-project.twig');
     }
 }

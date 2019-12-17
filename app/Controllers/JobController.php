@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use App\Models\JobModel;
 
-class JobController {
+class JobController extends BaseController {
     private function createJob($title, $description) {
         $job = new JobModel();
         $job->title = $title;
@@ -21,6 +21,6 @@ class JobController {
             $this->createJob($postData['title'], $postData['description']);
         }
 
-        include '../views/add-job.php';
+        return $this->renderHTML('add-job.twig');
     }
 }
