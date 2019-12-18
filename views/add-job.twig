@@ -1,12 +1,17 @@
 {% extends "main-template.twig" %}
 {% block content %}
     <h1>Add Job</h1>
-    <form action="/intro-php/add-job/" method="post">
+    <div class="alert alert-primary" role="alert">
+        {{ responseMessage }}
+    </div>
+    <form action="/intro-php/add-job/" method="post" enctype="multipart/form-data">
         <label for="">Title:</label>
         <input type="text" name="title"/>
         <br/>
         <label for="">Description:</label>
         <input type="text" name="description"/>
+        <br/>
+        <input type="file" name="asset"/>
         <br/>
         <button type="submit">Save</button>
     </form>
