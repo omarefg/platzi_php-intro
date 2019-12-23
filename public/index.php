@@ -38,23 +38,23 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
 
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
-$map->get('index', '/intro-php/', [
+$map->get('index', '/php-intro/', [
     'controller' => 'App\Controllers\IndexController',
     'action' => 'indexAction'
 ]);
-$map->get('add-job', '/intro-php/add-job/', [
+$map->get('add-job', '/php-intro/add-job/', [
     'controller' => 'App\Controllers\JobController',
     'action' => 'getAddJobAction'
 ]);
-$map->post('save-job', '/intro-php/add-job/', [
+$map->post('save-job', '/php-intro/add-job/', [
     'controller' => 'App\Controllers\JobController',
     'action' => 'getAddJobAction'
 ]);
-$map->get('add-project', '/intro-php/add-project/', [
+$map->get('add-project', '/php-intro/add-project/', [
     'controller' => 'App\Controllers\ProjectController',
     'action' => 'getAddProjectAction'
 ]);
-$map->post('save-project', '/intro-php/add-project/', [
+$map->post('save-project', '/php-intro/add-project/', [
     'controller' => 'App\Controllers\ProjectController',
     'action' => 'getAddProjectAction'
 ]);
