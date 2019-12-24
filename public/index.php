@@ -9,10 +9,15 @@ require_once '../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
+session_start();
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Aura\Router\RouterContainer;
+use App\Controllers\Routes;
 
 $capsule = new Capsule;
+
+$routes = new Routes;
 
 $capsule->addConnection([
     'driver'    => 'mysql',
@@ -38,26 +43,12 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
 
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
-$map->get('index', '/php-intro/', [
-    'controller' => 'App\Controllers\IndexController',
-    'action' => 'indexAction'
-]);
-$map->get('add-job', '/php-intro/add-job/', [
-    'controller' => 'App\Controllers\JobController',
-    'action' => 'getAddJobAction'
-]);
-$map->post('save-job', '/php-intro/add-job/', [
-    'controller' => 'App\Controllers\JobController',
-    'action' => 'getAddJobAction'
-]);
-$map->get('add-project', '/php-intro/add-project/', [
-    'controller' => 'App\Controllers\ProjectController',
-    'action' => 'getAddProjectAction'
-]);
-$map->post('save-project', '/php-intro/add-project/', [
-    'controller' => 'App\Controllers\ProjectController',
-    'action' => 'getAddProjectAction'
-]);
+
+foreach ($routes->getRoutes() as $path) {
+    foreach ($path['methods'] as $method) {
+        $map->{$method['method']}($method['name'], $path['path'], $method['items']);
+    }
+}
 
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
@@ -68,8 +59,22 @@ if (!$route) {
     $handlerData = $route->handler;
     $actionName = $handlerData['action'];
     $controllerName = $handlerData['controller'];
+    $authRequired = $handlerData['auth'] ?? false;
     $controller = new $controllerName;
     $response = $controller->$actionName($request);
+    $sessionUserId = $_SESSION['userId'] ?? null;
 
+    if ($authRequired && !$sessionUserId) {
+        echo('Protected route');
+        die;
+    }
+
+    foreach($response->getHeaders() as $name => $values) {
+        foreach($values as $value) {
+            header(sprintf('%s: %s', $name, $value), false);
+        }
+    }
+
+    http_response_code($response->getStatusCode());
     echo $response->getBody();
 }

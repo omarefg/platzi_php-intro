@@ -1,12 +1,17 @@
 {% extends "main-template.twig" %}
 {% block content %}
     <h1>Add Project</h1>
+    <div class="alert alert-primary" role="alert">
+        {{ responseMessage }}
+    </div>
     <form action="/php-intro/add-project/" method="post">
         <label for="">Title:</label>
         <input type="text" name="title"/>
         <br/>
         <label for="">Description:</label>
         <input type="text" name="description"/>
+        <br/>
+        <input type="file" name="asset"/>
         <br/>
         <button type="submit">Save</button>
     </form>
